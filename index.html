@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        body{
+            display: flex;
+            background-color: #2f3e46;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            flex-direction: column;
+        }
+        .timer-p{
+            margin-bottom: 2em;
+            font-size: 1.8em;
+            color: #cad2c5;
+            line-height: 0;
+        }
+        .holder-div{
+            display: flex;
+            flex-direction: row;
+            height: 12.2em;
+            width: 13em;
+            overflow: hidden;
+            background-color: #84a98c;
+            border-radius: 20px 10px 60px 20px;
+            padding-left: 1.6em;
+            box-shadow: -15px -15px 0 3px #e8ece656,-7px -7px 0 3px #84a98c54;
+            position: relative;
+        }
+        .left-p, .right-p{
+            color: #fdfdfd;
+            font-size: 7.2em;
+            text-orientation: upright;
+            writing-mode: vertical-lr;
+            font-weight: bold;
+            position: relative;
+            transition: top 2s ease-out;
+            top: -.1em;
+            line-height: .6em;
+            letter-spacing: -.3em;
+            font-family: arial;
+        }
+        .st-line{
+            position:absolute;
+            right: 0;
+            top: 0;
+            background-color: #cad2c5;
+            height: 100%;
+            width: 3em;
+            transition: background-color 2s;
+        }
+        .txt{
+            margin-top: .5em;
+            font-size: 1.5em;
+            color: #84a98c;
+            opacity: 0;
+            transform: scale(1);
+            transition: opacity .5s, transform 1s;
+        }
+        .txt span{
+            color:  rgb(255, 194, 38);
+        }
+    </style>
+    <script>
+        window.onload = function(){
+            let timer = document.getElementById("timer");
+            let t = 10;
+            let iv = window.setInterval(function(){
+                timer.innerText = t;
+                t--;
+                if(t == -1){
+                    window.clearInterval(iv);
+                    timer.innerText = "";
+                    document.getElementById("right-p").style.top = "-.91em";
+                    document.getElementById("txt").style.opacity = 1;
+                    document.getElementById("txt").style.transform = "scale(1.5)";
+                    document.getElementById("st-line").style.backgroundColor = "rgb(255, 194, 38)";
+                    window.setTimeout(function(){
+                        document.getElementById("txt").style.transform = "scale(1)";    
+                    },1000);
+                }
+            },1000);
+        };
+    </script>
+</head>
+<body>
+    <kbd id="timer" class="timer-p">&nbsp;</kbd>
+    <div class="holder-div">
+        <p class="left-p">22</p>
+        <p class="right-p" id="right-p">001</p>
+        <div id="st-line" class="st-line"></div>
+    </div>
+    <code id="txt" class="txt"><span>print(</span>"Happy Coding Year!"<span>)</span></code>
+</body>
+</html>
